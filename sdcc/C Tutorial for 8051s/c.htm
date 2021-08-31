@@ -1,0 +1,205 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.78 [en] (WinNT; U) [Netscape]">
+   <meta name="Author" content="Iguana Labs">
+   <meta name="Description" content="C Programmers Guide to Building Hardware with 8051 microcontrollers">
+   <meta name="KeyWords" content="8051, AT89C51, 89C51, C, C++, hardware, programmers, 8051s">
+   <title>Programming 8051s in C</title>
+<script LANGUAGE="javascript"></script>
+<script>
+<!--
+function land(ref, target)
+{
+lowtarget=target.toLowerCase();
+if (lowtarget=="_self") {window.location=loc;}
+else {if (lowtarget=="_top") {top.location=loc;}
+else {if (lowtarget=="_blank") {window.open(loc);}
+else {if (lowtarget=="_parent") {parent.location=loc;}
+else {parent.frames[target].location=loc;};
+}}}
+}
+
+function jump(menu)
+{
+ref=menu.choice.options[menu.choice.selectedIndex].value;
+splitc=ref.lastIndexOf("&");
+target="";
+if (splitc!=-1)
+{loc=ref.substring(0,splitc);
+target=ref.substring(splitc+1,1000);}
+else {loc=ref; target="_self";};
+if (ref != "") {land(loc,target);}
+}
+
+//-->
+</script>
+</head>
+<body background="whtsml.jpg">
+&nbsp;
+<table BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH="100%" >
+<tr>
+<td VALIGN=TOP>
+<center><b><font color="#006600"><font size=+3>Iguana Labs&nbsp;</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+800-297-1633</font></b>
+<br><b><font color="#006600"><font size=-1>47 Iroquois Ct, Lyons CO 80540</font></font></b></center>
+<a href="javascript:history.back(1)"><img SRC="back.jpg" ALT="Back To Previous Page" BORDER=0 height=24 width=87></a><a href="http://www.iguanalabs.net/Merchant2/merchant.mv?Screen=LOGN&Store_Code=IL"><img SRC="login.jpg" ALT="Log In" BORDER=0 height=24 width=93></a><a href="http://www.iguanalabs.com"><img SRC="home.jpg" ALT="Home" BORDER=0 height=24 width=87></a><a href="http://www.iguanalabs.com/ordrprts.htm"><img SRC="products.jpg" ALT="Products" BORDER=0 height=24 width=103></a><a href="http://www.iguanalabs.net/Merchant2/merchant.mv?Screen=BASK&Store_Code=IL"><img SRC="viewcart.jpg" ALT="View Cart Contents" BORDER=0 height=24 width=111></a><a href="http://www.iguanalabs.com"><img SRC="blank.jpg" BORDER=0 height=24 width=32></a><a href="http://www.iguanalabs.com"><img SRC="blanke.jpg" BORDER=0 height=24 width=24></a><a href="http://www.iguanalabs.net/Merchant2/merchant.mv?Screen=OINF&Store_Code=IL"><img SRC="checkout.jpg" ALT="Checkout" BORDER=0 height=24 width=113></a></td>
+</tr>
+
+<tr>
+<td>
+<table BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH="100%" >
+<tr>
+<td VALIGN=TOP WIDTH="145" BACKGROUND="green2.jpg"><b><a href="http://www.iguanalabs.com/mbkit.htm">Microcontroller</a></b>
+<br><b><a href="http://www.iguanalabs.com/mbkit.htm">Beginner</a></b>
+<br><b><a href="http://www.iguanalabs.com/mbkit.htm">Kit</a></b>
+<br><b>$119.00</b>
+<br><a href="http://www.iguanalabs.net/Merchant2/merchant.mv?Screen=BASK&Store_Code=IL&Action=ADPR&Product_Code=MBK&Attributes=Yes&Quantity=1"><img SRC="addtocart.jpg" BORDER=0 height=17 width=82></a>
+<p><b><a href="http://www.iguanalabs.com/8751prog.htm">ADT87</a></b>
+<br><b>$24.00</b>
+<br><a href="http://www.iguanalabs.net/Merchant2/merchant.mv?Screen=BASK&Store_Code=IL&Action=ADPR&Product_Code=ADT87&Attributes=Yes&Quantity=1"><img SRC="addtocart.jpg" BORDER=0 height=17 width=82></a>
+<p><b><a href="8951Kit.htm">8951Kit</a></b>
+<br><b>$8.50</b>
+<br><a href="http://www.iguanalabs.net/Merchant2/merchant.mv?Screen=BASK&Store_Code=IL&Action=ADPR&Product_Code=BASEKIT&Attributes=Yes&Quantity=1"><img SRC="addtocart.jpg" BORDER=0 height=17 width=82></a>
+<p><b><a href="http://www.iguanalabs.com/tempture.htm">Sensor Kit</a></b>
+<br><b>$34.00</b>
+<br><a href="http://www.iguanalabs.net/Merchant2/merchant.mv?Screen=BASK&Store_Code=IL&Action=ADPR&Product_Code=SK&Attributes=Yes&Quantity=1"><img SRC="addtocart.jpg" BORDER=0 height=17 width=82></a>
+<h5>
+<form action="dummy" method="post"><select name="choice" size="1" onChange="jump(this.form)"><option><font face="Book Antiqua"><font size=-2>Quick
+Links</option><option value="http://www.iguanalabs.com">Home Page</option><option value="2051prog.htm">Programmer</option><option value="books.htm">Books</option><option value="tools.htm">Free
+Tools</option><option value="library.htm">Code Library</option><option value="ordrprts.htm">Catalog</font></font></option></select></form></h5>
+
+<h5>
+<form action="dummy" method="post"><select name="choice" size="1" onChange="jump(this.form)"><option value=""><font face="Book Antiqua"><font size=-2>Free
+Tutorials</option><option value="basicdef.htm">Basic Concepts</option><option value="Compnets.htm">Components</option><option value="resistors.htm">Resistor
+Values</option><option value="ohmslaw.htm">Ohm's Law</option><option value="breadboard.htm">Breadboards</option><option value="1stled.htm">LEDs</option><option value="1stled.htm">Transistors</option><option value="555kit.htm">555
+Timer</option><option value="7805kit.htm">5 Volt Supply</option><option value="truthtab.htm">Truth
+Tables</option><option value="http://www.iguanalabs.com/mbktut/">Microcontrollers</option><option value="1stmicro.htm">8051</option><option value="1st2051.htm">2051</option><option value="1st8515.htm">8515</option><option value="7segment.htm">7
+Seg Display</option><option value="http://www.iguanalabs.com/sound/">Making
+Sound</option><option value="http://www.iguanalabs.com/switch.htm">Using
+Switches</option><option value="http://www.iguanalabs.com/adc2051.htm">ADC</option><option value="http://www.iguanalabs.com/light.htm">Sensors</option><option value="http://www.iguanalabs.com/mbklcd.htm">LCD
+Module</option><option value="http://www.iguanalabs.com/pwm.htm">PWM</font></font></option></select></form></h5>
+
+<h5>
+<form method="post" action="http://www.iguanalabs.com/cgi-bin/htsearch"><input type="hidden" name="config" value="htdig"><input type="text" size="15" name="words" value=""><br>
+<input type="submit" value="Search"></form></h5>
+
+<p><br><font size=-1><a href="signup.htm">Sign&nbsp; Up For</a></font>
+<br><font size=-1><a href="signup.htm">Newsletter</a></font>
+<p><font size=-1><a href="newprods.htm">New Products</a></font>
+<p><font size=-1><a href="latest.htm">Latest Tutorial</a></font>
+<p><font size=-1><a href="feedback.htm">Feedback</a></font>
+<p><font size=-1><a href="privpol.htm">Privacy</a></font>
+<br><font size=-1><a href="privpol.htm">Policy</a></font>
+<p><font size=-1><a href="shipping.htm">Shipping</a></font>
+<br><font size=-1><a href="shipping.htm">Information</a></font>
+<br>&nbsp;
+<p><a href="http://www.resellerratings.com/seller2936.html"><img SRC="reseller.gif" BORDER=0 height=88 width=124></a>
+<p>&nbsp;</td>
+
+<td VALIGN=TOP WIDTH="450">
+<center><font color="#000000"><font size=+3>Programming 8051s in C</font></font></center>
+
+<p><font color="#000000"><font size=+1>What's Needed</font></font>
+<p><font color="#000000">To get everything you need for these projects
+in C, get the Microcontroller Beginner Kit, the ADT87 adapter, and the
+8951Kit. The software CD that comes with the MB Kit includes an evaluation
+version of the Keil C compiler for 8051s. We will use this evaluation Keil
+software in our examples. (Yes that is only $151.50 for all the hardware
+and all the software including the professional quality <a href="http://www.iguanalabs.com/2051prog.htm">PG302
+device programmer!</a>)</font>
+<p><font color="#000000"><font size=+1>The C compiler</font></font>
+<p><font color="#000000">Start by installing the Keil software. Look for
+keil.exe in the <b>Tools -> C compilers</b> folder on the CD.</font>
+<p><font color="#000000"><font size=+1>New Project</font></font>
+<p><font color="#000000">Next close the default project that opens up in
+the compiler by clicking on <b>Project -> Close Project</b>.&nbsp;</font>
+<p><font color="#000000">Then start a new project by clicking on <b>Project
+-> New Project</b>. Call it blink1. (You can create a new folder for the
+project if you would like to keep the new files together in their own folder.)</font>
+<p><font color="#000000">Select target microcontroller by clicking on Atmel
+and AT89C51. Click Ok and then click No when it asks you if you would like
+to copy the startup code.</font>
+<p><font color="#000000">Click on the little button just to the left of
+where it says Target 1 in the third row of the toolbar at the top of the
+screen. (They could make this a little easier to find.) This should bring
+up a window that says Options for Target 'Target 1'.</font>
+<p><font color="#000000">Click on the Output Tab.</font>
+<p><font color="#000000">Click the box beside Create Hex File so that it
+has a checkmark. Then click Ok to save the settings.</font>
+<p><font color="#000000"><font size=+1>The C Program</font></font>
+<p><font color="#000000">Click the small + sign beside Target 1 in the
+Project Workspace window on the left. Add the first example program to
+the project by right clicking on Source Group 1 -> Add Files To Group.
+Find <a href="ledtest.c">ledtest.c</a>.</font>
+<p><font color="#000000"><font size=+1>Compile and Build the Hex File</font></font>
+<p><font color="#000000">Click on Project -> Rebuild all target files</font>
+<br><font color="#000000">This should create a file called blink1.hex in
+the project folder.</font>
+<p><font color="#000000"><font size=+1>Downloading the Hex File</font></font>
+<p><font color="#000000">Put the ADT87 adapter on the PG302 as shown below
+and push down the green handle to hold the adapter in place.</font>
+<p><img SRC="pgwadt87.jpg" height=365 width=379>
+<p><font color="#000000">Connect the serial cable and the power supply&nbsp;
+to the PG302 programmer.&nbsp;</font>
+<p><font color="#000000">Put the 89C51 into the ADT87 adapter and close
+the handle as shown in the picture above.</font>
+<p><font color="#000000">If you have not installed the PG302 software you
+need to do that now. <a href="http://www.iguanalabs.com/mbktut/index.htm#_Toc519912613">Click
+here for instructions.</a></font>
+<p><font color="#000000">Start the PG302 software.&nbsp;</font>
+<p><font color="#000000">From the Setup Menu, select the Atmel 89C51.&nbsp;</font>
+<p><font color="#000000">From the Setup Menu, select the Comm port you
+are using.&nbsp;</font>
+<p><font color="#000000">Press PROGRAM DEVICE.&nbsp;</font>
+<p><font color="#000000">Press BROWSE.&nbsp;</font>
+<p><font color="#000000">Find blink1.hex and click on it (single click).&nbsp;</font>
+<p><font color="#000000">Press OK to select the file.&nbsp;</font>
+<p><font color="#000000">Press OK to program the file into the microcontroller.&nbsp;</font>
+<p><font color="#000000">The status bar should say 'Device Equals File'.&nbsp;
+The program is now loaded into the microcontroller.&nbsp;</font>
+<p><font size=+1>The Hardware</font>
+<p><font color="#000000">We will start with the basic setup as shown below.</font>
+<center>
+<p><a href="8951proj.jpg"><img SRC="8951projs.jpg" BORDER=0 height=623 width=200></a><a href="8951proj.jpg"><img SRC="1st8951.jpg" BORDER=0 height=467 width=334></a></center>
+
+<p>Make sure you connect pin 40 to 5 Volts and pin 20 to ground.
+<p>For more background on the basic hardware look at <a href="http://www.iguanalabs.com/1stled.htm">1stled.htm</a>.
+<p><font color="#000000">Make sure the power is off for the circuit when
+inserting or removing the 89C51.&nbsp;</font>
+<p><font color="#000000">Turn on the power to the circuit. If the LED starts
+blinking, then it is time to celebrate!</font>
+<p><font color="#000000"><font size=+1>Another Example</font></font><font color="#000000"></font>
+<p><font color="#000000">A slightly different version counts from 0 to
+255 on the output ports 0 and 1. It is <a href="ledcount.c">ledcount.c</a>.
+Move the LED to the different port pins to see the counting action or connect
+an LED to each Port 1 pin to see it all at once.</font><font color="#000000"></font>
+<p><font color="#000000">To get all the parts required for this project,
+get the <a href="http://www.iguanalabs.com/mbkit.htm">Microcontroller Beginner
+Kit</a>, the <a href="http://www.iguanalabs.com/8751prog.htm">ADT87</a>,
+and the <a href="http://www.iguanalabs.com/8951Kit.htm">8951Kit</a>. <a href="http://www.iguanalabs.com/ordrprts.htm">Click
+here to go to the main products page with links for these parts.</a></font>
+<p>More tutorials for C programing are coming soon. Until then you can
+take a look at the tutorials below that use assembly language.
+<p><font color="#000000"><a href="http://www.iguanalabs.com/advanced.htm">Tutorials
+Menu</a></font>
+<br><font color="#000000"><a href="http://www.iguanalabs.com/clock.htm">Building
+a Digital Clock</a></font>
+<br><font color="#000000"><a href="http://www.iguanalabs.com/eeprom.htm">Using
+the 8051 EEPROM (non volatile memory)</a></font>
+<br><font color="#000000"><a href="http://www.iguanalabs.com/light.htm">Using
+a Light Sensor</a></font>
+<br><font color="#000000"><a href="http://www.iguanalabs.com/tempture.htm">Using
+a Temperature Sensor</a></font>
+<p><font color="#000000"><a href="http://www.iguanalabs.com/emailus.htm">Click
+here to send us comments or questions</a>.</font>
+<p><font color="#000000">This page last updated on March 19, 2004.</font></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+</body>
+</html>
