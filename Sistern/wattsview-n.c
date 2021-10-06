@@ -26,7 +26,7 @@
 
 extern void display(byte *buff);
 
-char init[] = { "--2.0" };	// 2 Turn Version
+char init[] = { "--2.1" };	// 2 Turn Version
 
 /*
 ** 2 Turn version
@@ -207,7 +207,7 @@ void main(void) {
       // ** Read a character, store it in an array until we match the
       // **  OFF
 
-      // Word seperators: SPACE, CR, NL
+      // Word separators: SPACE, CR, NL
       if(chr == ' ' || chr == '\r' || chr == '\n') {
 	// Okay now we've got the Watts used as a string
 	char *ptr;
@@ -234,12 +234,18 @@ void main(void) {
 	  // gives us
 	  // iValue.iTmp (where iTmp is 4 places long)
 	  iValue  = l/10000;
-	  iTmp    = mod(l, 10000);
 
-	  // String:  12.34  (KWatts, left justify)
-	  ptr = myItoa(iValue, iTmp);
+          // Bob W. asked that <2W be 0.0W 2021104
+          if(l < 2) {
+              iValue = 0; // Correction for <2W
+              iTmp   = 0;
+          } else {
+              iTmp    = mod(l, 10000);
+          }
+          // String:  12.34  (KWatts, left justify)
+          ptr = myItoa(iValue, iTmp);
 
-	  // Back to a string
+              // Back to a string
 	  display(ptr);
 	} else if(buf[idx-1] == 'F') { // if 'W'
 	  ptr = " 0?? "; // translates to OFF
@@ -264,24 +270,3 @@ void main(void) {
     } // RI
   } // --[ for(;;) ]----------------------------------------------------------
 }
-
-/*
-
-	  // Make sure we null terminate at the W
-	  buf[7] = 0;
-
-	  // Integer: 123456 (Watts x10)
-	  l = myAtol(buf); // value x10
-	  // Divide by 2 for the 2:1 ratio
-	  l = l >> 1;
-
-	  // We're doing integer math so *10 to get rid of the decimal point and div by 1000 to get KW
-	  iValue  = l/10000;
-	  iTmp    = mod(l, 10000);
-
-
-	  // String:  12.34  (KWatts, left justify)
-	  ptr = myItoa(iValue, iTmp);
-	  // Back to a string
-
-*/
