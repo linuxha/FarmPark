@@ -12,7 +12,20 @@ Source code related to Wattsview and the Feats of Strength display
 
 ## Sistern
 
+Version: --2.1
+
+2 turns of the wire and display 0.0 when less than 2W.
+
 Source code related to the Wattsview and the Sistern display
+
+Field separator: space (0x20), \r (CR - 0xoD), or \n (LF - 0x0A)
+
+Expected input:  000012.1V 00001.0A 00012.1W 00000.0WH\r\n
+Expected output:  12.1
+
+or
+Expected input:  OFF\r\n
+Expected output: _OFF
 
 ## sdcc
 
