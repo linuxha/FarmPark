@@ -70,7 +70,7 @@ njc@mozart:~/dev/farmpark/release$
 
 ## Programmer - TL866II+
 
-This is the TL866II+ programmer
+This is the TL866II+ programmer under Linux (need to add the code to this repos). Because the USB device is not presented as a serial port the device require root access. I recommend setting up sudo for this.
 
 ```
 #+Name: Burn Wattsview-n Sistern code
@@ -78,8 +78,29 @@ This is the TL866II+ programmer
 date
 cd ${HOME}/dev/git/minipro
 
-sudo ./miniprohex -p AT89C2051@DIP20 -r /home/njc/dev/farmpark/release/r-wattsview-n.ihx
+sudo ./miniprohex -p AT89C2051@DIP20 -w /home/njc/dev/farmpark/release/r-wattsview-n.ihx
 #+end_src
+
+njc@mozart:~/dev/git/minipro$ sudo ./miniprohex -p AT89C2051@DIP20 -w /home/njc/dev/farmpark/release/wattsview-n.ihx
+_open (7713)
+Found TL866II+ 04.2.123 (0x27b)
+minipro_pin_text (7713)
+is_pld()
+TSOP48 adapter
+Outside Verifying Chip ID
+Verify Chip ID
+minipro_get_chip_id()
+tl866iiplus_get_chip_id()
+msg: 01 02 1E 21 00 00 
+minipro_end_transaction()
+Chip ID OK: 0x1E21
+Found Intel hex file.
+Erasing... 0.27Sec OK
+Writing Code...  3.06Sec  OK
+Reading Code...  0.06Sec  OK
+Verification OK
+njc@mozart:~/dev/git/minipro$ 
+
 ```
 
 ```
@@ -171,6 +192,8 @@ options:
   --help		-h		Show help (this text)
 :end:
 ```
+
+It is possible to set this programmer device up so that it doesn't require sudo. I'll add those notes here at a later time.
 
 ## Other programmer - PG302
 
