@@ -11,14 +11,17 @@ Source code related to the Wattsview and the Sistern display
 
 Field separator: space (0x20), \r (CR - 0xoD), or \n (LF - 0x0A)
 
+```
 Expected input:  000012.1V 00001.0A 00012.1W 00000.0WH\r\n
 Expected output:  12.1
 
 or
 Expected input:  OFF\r\n
 Expected output: _OFF
+```
 
 ## Notes
+```
 njc@mozart:~/dev/farmpark/release$ make wattsview-n
 sdcc -mmcs51 --model-small --iram-size 128 -o wattsview-n.rel -c wattsview-n.c
 sdcc -mmcs51 --model-small --iram-size 128 wattsview-n.rel display.rel  -o wattsview-n.ihx
@@ -61,3 +64,4 @@ njc@mozart:~/dev/farmpark/release$ sdcc -v
 SDCC : mcs51/z80/z180/r2k/r3ka/gbz80/tlcs90/ds390/TININative/ds400/hc08/s08/stm8 3.8.0 #10562 (Linux)
 published under GNU General Public License (GPL)
 njc@mozart:~/dev/farmpark/release$ 
+```

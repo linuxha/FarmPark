@@ -33,6 +33,7 @@ SDCC needed to compile 89Cx051 code used in the 4x7 Segement LED Displays
 
 ## Tmp notes
 
+```
 sdcc 2.6.0 is now configured for
 
   Build:
@@ -78,6 +79,8 @@ sdcc 2.6.0 is now configured for
                         /usr/local/share/sdcc/lib/<model>
 
 /home/njc/t/cookie/dev.storage/farmpark/other/sdcc
+
+```
 
 APPLICATION NOTE 3477
 USING THE FREE SDCC C COMPILER TO DEVELOP FIRMWARE FOR THE DS89C430/450 FAMILY OF MICROCONTROLLERS
