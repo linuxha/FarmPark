@@ -1,5 +1,7 @@
 # Sistern
 
+Yup, it's spelled wrong, should be Cistern. The mistake was made a long time ago and I must now live with it.
+
 wattsview-n - Sistern
 wattsview - Feats of Strength
 
