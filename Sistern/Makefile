@@ -7,12 +7,13 @@
 #
 
 # ----------------------------------------------------------------------------
-PATH:=/opt/sdcc-2.6.0/bin:${PATH}:/home/njc/cookie/dev.storage/farmpark/other/PG302
+export PATH:=/opt/sdcc-2.6.0/bin:${PATH}:/home/njc/cookie/dev.storage/farmpark/other/PG302:/home/njc/dev/git/minipro:
+BPATH   = /home/njc/dev/git/minipro
 SDCC_HOME=/opt/sdcc-2.6.0
 
 #COPT	= -mmcs51 --model-small --stack-size 32 -D"ID=\'A\'"
-COPT	= -mmcs51 --model-small --iram-size 128
-OPT	= -mmcs51 --model-small --iram-size 128
+COPT	= -mmcs51 --model-small --iram-size 128 -V
+OPT	= -mmcs51 --model-small --iram-size 128 -V
 CC	= sdcc
 
 VER	= 1.0
@@ -25,7 +26,8 @@ VER	= 1.0
 	$(CC) $(COPT) -c $<
 # ----------------------------------------------------------------------------
 
-all:	farmparkA farmparkB farmparkC farmparkD
+#all:	farmparkA farmparkB farmparkC farmparkD
+all:	wattsview-1
 
 # ============================================================================
 clean:
@@ -100,8 +102,32 @@ wattsview-n:	wattsview-n.ihx
 wattsview-n.ihx:	wattsview-n.rel display.rel
 	$(CC) $(COPT) $^  -o $@
 
-wattsview-n.rel : wattsview-n.c local.h
+wattsview-n.rel:	wattsview-n.c local.h
 	$(CC) $(OPT) -o $@ -c $<
+
+# 
+wattsview-1:	wattsview-1.ihx
+	packihx $^ > $@.hex
+	echo "89C2051 has 0x800 of flash and  128 bytes of ram"
+	cat $@.mem
+
+wattsview-1.ihx:	wattsview-1.rel display.rel
+	$(CC) $(COPT) $^  -o $@
+
+wattsview-1.rel:	wattsview-n.c local.h
+	$(CC) $(OPT) -DONETURN -DXMIT -o $@ -c $<
+
+# 
+wattsview-2:	wattsview-2.ihx
+	packihx $^ > $@.hex
+	echo "89C2051 has 0x800 of flash and  128 bytes of ram"
+	cat $@.mem
+
+wattsview-2.ihx:	wattsview-2.rel display.rel
+	$(CC) $(COPT) $^  -o $@
+
+wattsview-2.rel:	wattsview-n.c local.h
+	$(CC) $(OPT) -DTWOTURN -o $@ -c $<
 
 # ----------------------------------------------------------------------------
 burn:
@@ -112,6 +138,15 @@ burn:
 	@echo pg302 -p /dev/ttyUSB1 prog wattsview.ihx
 	@echo pg302 -p /dev/ttyUSB1 verify wattsview.ihx
 	pg302
+
+burn-1:	wattsview-1.ihx
+	@echo Burn 1 Turn code
+	@echo "Current Working Directory: ${PWD}"
+	cd $(BPATH); sudo ./miniprohex -p AT89C2051@DIP20 -w ${PWD}/$< ; echo $$?
+
+burn-2:	wattsview-2.ihx
+	echo Burn 2 Turn code
+	cd $(BPATH); sudo ./miniprohex -p AT89C2051@DIP20 -w /home/njc/dev/farmpark/release/$< ; echo $$?
 
 # 1042  /home/njc/dev/pg302/src/pg302 -l usb1
 # 1043  /home/njc/dev/pg302/src/pg302
@@ -130,3 +165,9 @@ burn:
 test:
 	@echo "Path:"
 	@echo ${PATH}
+
+check:
+	which sdcc
+
+help:
+	@echo -e 'Use:\n\tmake - to compile to hex\n\tmake clean - to clean up all the files\n\tmake tidy - to clan up but leave the .hex file\n\tmake bak - to clean up (no .hex) and create a tar.gz backup\n\tmake burn - burn .ihx file (pg302)\n\tmake burn-1 - burn .ihx file (miniprohex)'
